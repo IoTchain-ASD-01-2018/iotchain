@@ -28,12 +28,17 @@ def request_blockchain(request):
         query_string = request.GET.urlencode()
         dados = {
             "index": None,
-            "hash": None
+            "hash": None,
+            "origem": None,
+            "destino": None
         }
         if len(query_string) > 0:
             query_string = query_string.split("&")
             for query in query_string:
                 query = query.split("=")
                 dados[query[0]] = query[1]
-        return responder(ler_blockchain(dados['index'], dados['hash']),
-                                        200)
+        return responder(ler_blockchain(dados['index'],
+                                        dados['hash'],
+                                        dados['origem'],
+                                        dados['destino']),
+                         200)
